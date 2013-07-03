@@ -14,7 +14,7 @@
          </th>
        {% endif %}
      {% endfor %}
-     {% if inline_admin_formset.formset.can_delete %}<th>{% trans "Delete?" %}</th>{% endif %}
+     {% if inline_admin_formset.formset.can_delete and has_change_permission %}<th>{% trans "Delete?" %}</th>{% endif %}
      </tr></thead>
 
      <tbody>
@@ -55,7 +55,7 @@
             {% endfor %}
           {% endfor %}
         {% endfor %}
-        {% if inline_admin_formset.formset.can_delete %}
+        {% if inline_admin_formset.formset.can_delete and has_change_permission %}
           <td class="delete">{% if inline_admin_form.original %}{{ inline_admin_form.deletion_field.field }}{% endif %}</td>
         {% endif %}
         </tr>
@@ -66,6 +66,7 @@
   </div>
 </div>
 
+{% if has_change_permission %}
 <script type="text/javascript">
 
 (function($) {
@@ -77,3 +78,4 @@
   });
 })(django.jQuery);
 </script>
+{% endif %}

@@ -311,6 +311,21 @@ class BaseModelAdmin(six.with_metaclass(forms.MediaDefiningClass)):
         opts = self.opts
         return request.user.has_perm(opts.app_label + '.' + opts.get_delete_permission())
 
+    def has_view_permission(self, request, obj=None):
+        """
+        Returns True if the given request has permission to view the given
+        Django model instance, the default implementation doesn't examine the
+        `obj` parameter.
+
+        Can be overriden by the user in subclasses. In such case it should
+        return True if the given request has permission to view the `obj`
+        model instance. If `obj` is None, this should return True if the given
+        request has permission to view *any* object of the given type.
+        """
+        opts = self.opts
+        return request.user.has_perm(opts.app_label + '.' + opts.get_view_permission())
+
+
 class ModelAdmin(BaseModelAdmin):
     "Encapsulates all admin options and functionality for a given model."
 
@@ -424,6 +439,7 @@ class ModelAdmin(BaseModelAdmin):
             'add': self.has_add_permission(request),
             'change': self.has_change_permission(request),
             'delete': self.has_delete_permission(request),
+            'view': self.has_view_permission(request),
         }
 
     def get_fieldsets(self, request, obj=None):
@@ -1067,7 +1083,12 @@ class ModelAdmin(BaseModelAdmin):
 
         obj = self.get_object(request, unquote(object_id))
 
-        if not self.has_change_permission(request, obj):
+        if self.has_change_permission(request, obj):
+            pass
+        elif self.has_view_permission(request, obj):
+            if request.method == 'POST':
+                raise PermissionDenied(_('Sorry, you don''t have privilegies to update %(name)s.') % {'name': force_text(opts.verbose_name)})
+        else:
             raise PermissionDenied
 
         if obj is None:
@@ -1120,16 +1141,32 @@ class ModelAdmin(BaseModelAdmin):
                                   queryset=inline.queryset(request))
                 formsets.append(formset)
 
+        if self.has_change_permission(request, obj):
+            view_readonly_fields = self.get_readonly_fields(request, obj)
+        else:
+            view_readonly_fields = self.get_form(request, obj).base_fields.keys()
+
         adminForm = helpers.AdminForm(form, self.get_fieldsets(request, obj),
             self.get_prepopulated_fields(request, obj),
-            self.get_readonly_fields(request, obj),
+            view_readonly_fields,
             model_admin=self)
+
         media = self.media + adminForm.media
 
         inline_admin_formsets = []
         for inline, formset in zip(inline_instances, formsets):
             fieldsets = list(inline.get_fieldsets(request, obj))
-            readonly = list(inline.get_readonly_fields(request, obj))
+            if inline.has_change_permission(request, obj):
+                readonly = list(inline.get_readonly_fields(request, obj))
+            else:
+                if inline.fieldsets:
+                    readonly = []
+                    for fs in inline.fieldsets:
+                        fields = fs[1].get('fields', [])
+                        for ff in fields:
+                            readonly.append(ff)
+                else:
+                    readonly = [o_field.attname for o_field in inline.model._meta.fields]
             prepopulated = dict(inline.get_prepopulated_fields(request, obj))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, prepopulated, readonly, model_admin=self)
@@ -1158,7 +1195,9 @@ class ModelAdmin(BaseModelAdmin):
         from django.contrib.admin.views.main import ERROR_FLAG
         opts = self.model._meta
         app_label = opts.app_label
-        if not self.has_change_permission(request, None):
+        if self.has_change_permission(request, None) or self.has_view_permission(request, None):
+            pass
+        else:
             raise PermissionDenied
 
         list_display = self.get_list_display(request)
@@ -1479,7 +1518,9 @@ class InlineModelAdmin(BaseModelAdmin):
 
     def queryset(self, request):
         queryset = super(InlineModelAdmin, self).queryset(request)
-        if not self.has_change_permission(request):
+        if self.has_change_permission(request) or self.has_view_permission(request):
+            pass
+        else:
             queryset = queryset.none()
         return queryset
 
@@ -1514,6 +1555,16 @@ class InlineModelAdmin(BaseModelAdmin):
             return self.has_change_permission(request, obj)
         return request.user.has_perm(
             self.opts.app_label + '.' + self.opts.get_delete_permission())
+
+    def has_view_permission(self, request, obj=None):
+        if self.opts.auto_created:
+            # We're checking the rights to an auto-created intermediate model,
+            # which doesn't have its own individual permissions. The user needs
+            # to have the change permission for the related model in order to
+            # be able to do anything with the intermediate model.
+            return self.has_change_permission(request, obj)
+        return request.user.has_perm(
+            self.opts.app_label + '.' + self.opts.get_view_permission())
 
 
 class StackedInline(InlineModelAdmin):
