@@ -333,6 +333,9 @@ def help_text_for_field(name, model):
 def display_for_field(value, field):
     from django.contrib.admin.templatetags.admin_list import _boolean_icon
     from django.contrib.admin.views.main import EMPTY_CHANGELIST_VALUE
+    from django.utils.html import escape
+    from django.utils.safestring import mark_safe
+    import os.path
 
     if field.flatchoices:
         return dict(field.flatchoices).get(value, EMPTY_CHANGELIST_VALUE)
@@ -350,6 +353,15 @@ def display_for_field(value, field):
         return formats.number_format(value, field.decimal_places)
     elif isinstance(field, models.FloatField):
         return formats.number_format(value)
+    elif isinstance(field, models.FileField):
+        try:
+            # Causes a ValueError if file is empty.
+            value.file
+            return mark_safe(u'<a href="%s">%s</a>'
+                % (escape(value.url),
+                    os.path.basename(smart_text(value))))
+        except ValueError:
+            return EMPTY_CHANGELIST_VALUE
     else:
         return smart_text(value)
 
