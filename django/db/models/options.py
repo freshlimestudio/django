@@ -446,6 +446,17 @@ class Options(object):
             DeprecationWarning, stacklevel=2)
         return 'delete_%s' % self.model_name
 
+    def get_view_permission(self):
+        """
+        This method has been deprecated in favor of
+        `django.contrib.auth.get_permission_codename`. refs #20642
+        """
+        warnings.warn(
+            "`Options.get_view_permission` has been deprecated in favor "
+            "of `django.contrib.auth.get_permission_codename`.",
+            DeprecationWarning, stacklevel=2)
+        return 'view_%s' % self.model_name
+
     def get_all_related_objects(self, local_only=False, include_hidden=False,
                                 include_proxy_eq=False):
         return [k for k, v in self.get_all_related_objects_with_model(
