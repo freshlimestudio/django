@@ -1144,7 +1144,7 @@ class ModelAdmin(BaseModelAdmin):
         if self.has_change_permission(request, obj):
             view_readonly_fields = self.get_readonly_fields(request, obj)
         else:
-            view_readonly_fields = self.get_form(request, obj).base_fields.keys()
+            view_readonly_fields = self.get_form(request, obj)._meta.fields
 
         adminForm = helpers.AdminForm(form, self.get_fieldsets(request, obj),
             self.get_prepopulated_fields(request, obj),
