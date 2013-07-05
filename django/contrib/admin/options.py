@@ -789,6 +789,7 @@ class ModelAdmin(BaseModelAdmin):
             'has_add_permission': self.has_add_permission(request),
             'has_change_permission': self.has_change_permission(request, obj),
             'has_delete_permission': self.has_delete_permission(request, obj),
+            'has_view_permission': self.has_view_permission(request, obj),
             'has_file_field': True, # FIXME - this should check if form or formsets have a FileField,
             'has_absolute_url': hasattr(self.model, 'get_absolute_url'),
             'ordered_objects': ordered_objects,
@@ -896,7 +897,7 @@ class ModelAdmin(BaseModelAdmin):
         when adding a new object.
         """
         opts = self.model._meta
-        if self.has_change_permission(request, None):
+        if self.has_change_permission(request, None) or self.has_view_permission(request, None):
             post_url = reverse('admin:%s_%s_changelist' %
                                (opts.app_label, opts.module_name),
                                current_app=self.admin_site.name)
@@ -911,7 +912,7 @@ class ModelAdmin(BaseModelAdmin):
         when editing an existing object.
         """
         opts = self.model._meta
-        if self.has_change_permission(request, None):
+        if self.has_change_permission(request, None) or self.has_view_permission(request, None):
             post_url = reverse('admin:%s_%s_changelist' %
                                (opts.app_label, opts.module_name),
                                current_app=self.admin_site.name)
@@ -1173,8 +1174,11 @@ class ModelAdmin(BaseModelAdmin):
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
+        title = _('View %s') % force_text(opts.verbose_name)
+        if self.has_change_permission(request, obj):
+            title = _('Change %s') % force_text(opts.verbose_name)
         context = {
-            'title': _('Change %s') % force_text(opts.verbose_name),
+            'title': title,
             'adminform': adminForm,
             'object_id': object_id,
             'original': obj,
