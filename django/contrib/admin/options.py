@@ -1088,7 +1088,7 @@ class ModelAdmin(BaseModelAdmin):
             pass
         elif self.has_view_permission(request, obj):
             if request.method == 'POST':
-                raise PermissionDenied(_('Sorry, you don''t have privilegies to update %(name)s.') % {'name': force_text(opts.verbose_name)})
+                raise PermissionDenied(_('Sorry, you dont have privilege to update %(name)s.') % {'name': force_text(opts.verbose_name)})
         else:
             raise PermissionDenied
 

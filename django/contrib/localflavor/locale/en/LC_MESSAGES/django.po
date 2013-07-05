@@ -6,37 +6,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-15 10:57+0200\n"
+"POT-Creation-Date: 2013-07-05 16:10+0300\n"
 "PO-Revision-Date: 2012-10-17 09:16+0000\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team: English <en@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ar/forms.py:30
+#: ar/forms.py:32
 msgid "Enter a postal code in the format NNNN or ANNNNAAA."
 msgstr "Enter a postal code in the format NNNN or ANNNNAAA."
 
-#: ar/forms.py:52 br/forms.py:95 br/forms.py:134 pe/forms.py:27 pe/forms.py:55
+#: ar/forms.py:54 br/forms.py:95 br/forms.py:134 pe/forms.py:27 pe/forms.py:55
 msgid "This field requires only numbers."
 msgstr "This field requires only numbers."
 
-#: ar/forms.py:53
+#: ar/forms.py:55
 msgid "This field requires 7 or 8 digits."
 msgstr "This field requires 7 or 8 digits."
 
-#: ar/forms.py:82
+#: ar/forms.py:84
 msgid "Enter a valid CUIT in XX-XXXXXXXX-X or XXXXXXXXXXXX format."
 msgstr "Enter a valid CUIT in XX-XXXXXXXX-X or XXXXXXXXXXXX format."
 
-#: ar/forms.py:83
+#: ar/forms.py:85
 msgid "Invalid CUIT."
 msgstr "Invalid CUIT."
 
-#: ar/forms.py:84
+#: ar/forms.py:86
 msgid "Invalid legal type. Type must be 27, 20, 23 or 30."
 msgstr "Invalid legal type. Type must be 27, 20, 23 or 30."
 
