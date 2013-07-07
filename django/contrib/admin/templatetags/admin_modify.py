@@ -34,12 +34,18 @@ def submit_row(context):
         'onclick_attrib': (opts.get_ordered_objects() and change
                             and 'onclick="submitOrderForm();"' or ''),
         'show_delete_link': (not is_popup and context['has_delete_permission']
-                              and change and context.get('show_delete', True) and not view),
+                             and change
+                             and context.get('show_delete', True)
+                             and not view),
         'show_change_link': (not is_popup and context['has_change_permission'] and view),
-        'show_save_as_new': not is_popup and change and save_as and not view,
-        'show_save_and_add_another': context['has_add_permission'] and
-                            not is_popup and (not save_as or context['add'] and
-                            not view),
+        'show_save_as_new': (not is_popup and change and save_as
+                             and context['has_change_permission']
+                             and context['has_add_permission']
+                             and not view),
+        'show_save_and_add_another': context['has_add_permission']
+                            and not is_popup
+                            and context['has_change_permission']
+                            and (not save_as or context['add'] and not view),
         'show_save_and_continue': not is_popup and context['has_change_permission'] and not view,
         'is_popup': is_popup,
         'show_save': context['has_change_permission'] and not view,

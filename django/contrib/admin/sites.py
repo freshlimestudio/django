@@ -46,7 +46,7 @@ class AdminSite(object):
         self._registry = {}  # model_class class -> admin_class instance
         self.name = name
         self.app_name = app_name
-        self._actions = {'delete_selected': actions.delete_selected}
+        self._actions = {}
         self._global_actions = self._actions.copy()
 
     def register(self, model_or_iterable, admin_class=None, **options):

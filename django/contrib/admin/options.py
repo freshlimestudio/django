@@ -2,6 +2,8 @@ import copy
 from functools import update_wrapper, partial
 import warnings
 
+from django.contrib.admin import actions as actions_module
+
 from django import forms
 from django.conf import settings
 from django.forms.formsets import all_valid
@@ -602,10 +604,17 @@ class ModelAdmin(BaseModelAdmin):
 
         actions = []
 
-        # Gather actions from the admin site first
+        # Gather actions from the admin site first (only not required any permissions)
         for (name, func) in self.admin_site.actions:
             description = getattr(func, 'short_description', name.replace('_', ' '))
             actions.append((func, name, description))
+
+        if self.has_delete_permission(request, None):
+            name = 'delete_selected'
+            func = actions_module.delete_selected
+            description = getattr(func, 'short_description', name.replace('_', ' '))
+            actions.append((func, name, description))
+
 
         # Then gather them from the model admin and all parent classes,
         # starting with self and working back up.
