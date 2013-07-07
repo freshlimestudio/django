@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-05 17:00+0300\n"
+"POT-Creation-Date: 2013-07-07 20:47+0300\n"
 "PO-Revision-Date: 2013-01-04 18:26+0000\n"
 "Last-Translator: Eugene MechanisM <contact@mechanism.name>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/django/language/"
@@ -27,12 +27,12 @@ msgstr ""
 msgid "Successfully deleted %(count)d %(items)s."
 msgstr "Успешно удалены %(count)d %(items)s."
 
-#: actions.py:60 options.py:1390
+#: actions.py:60 options.py:1471
 #, python-format
 msgid "Cannot delete %(name)s"
 msgstr "Не удается удалить %(name)s"
 
-#: actions.py:62 options.py:1392
+#: actions.py:62 options.py:1473
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
@@ -141,39 +141,39 @@ msgstr "Удалено \"%(object)s.\""
 msgid "LogEntry Object"
 msgstr "Запись в журнале"
 
-#: options.py:156 options.py:172
+#: options.py:158 options.py:174
 msgid "None"
 msgstr "Нет"
 
-#: options.py:700
+#: options.py:712
 #, python-format
 msgid "Changed %s."
 msgstr "Изменен %s."
 
-#: options.py:700 options.py:710
+#: options.py:712 options.py:722
 msgid "and"
 msgstr "и"
 
-#: options.py:705
+#: options.py:717
 #, python-format
 msgid "Added %(name)s \"%(object)s\"."
 msgstr "Добавлен %(name)s \"%(object)s\"."
 
-#: options.py:709
+#: options.py:721
 #, python-format
 msgid "Changed %(list)s for %(name)s \"%(object)s\"."
 msgstr "Изменены %(list)s для %(name)s \"%(object)s\"."
 
-#: options.py:714
+#: options.py:726
 #, python-format
 msgid "Deleted %(name)s \"%(object)s\"."
 msgstr "Удален %(name)s \"%(object)s\"."
 
-#: options.py:718
+#: options.py:730
 msgid "No fields changed."
 msgstr "Ни одно поле не изменено."
 
-#: options.py:824 options.py:877
+#: options.py:837 options.py:890
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was added successfully. You may edit it again below."
@@ -181,7 +181,7 @@ msgstr ""
 "%(name)s \"%(obj)s\" был успешно добавлен. Ниже вы можете снова его "
 "отредактировать."
 
-#: options.py:852
+#: options.py:865
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was added successfully. You may add another "
@@ -189,12 +189,12 @@ msgid ""
 msgstr ""
 "%(name)s \"%(obj)s\" успешно добавлен. Ниже вы можете добавить еще %(name)s."
 
-#: options.py:856
+#: options.py:869
 #, python-format
 msgid "The %(name)s \"%(obj)s\" was added successfully."
 msgstr "%(name)s \"%(obj)s\" был успешно добавлен."
 
-#: options.py:870
+#: options.py:883
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was changed successfully. You may edit it again "
@@ -202,7 +202,7 @@ msgid ""
 msgstr ""
 "%(name)s \"%(obj)s\" успешно изменен. Ниже вы можете редактировать снова."
 
-#: options.py:884
+#: options.py:897
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was changed successfully. You may add another "
@@ -210,12 +210,12 @@ msgid ""
 msgstr ""
 "%(name)s \"%(obj)s\" успешно изменен. Ниже вы можете добавить еще %(name)s."
 
-#: options.py:890
+#: options.py:903
 #, python-format
 msgid "The %(name)s \"%(obj)s\" was changed successfully."
 msgstr "%(name)s \"%(obj)s\" был успешно изменен."
 
-#: options.py:968 options.py:1254
+#: options.py:981 options.py:1335
 msgid ""
 "Items must be selected in order to perform actions on them. No items have "
 "been changed."
@@ -223,40 +223,40 @@ msgstr ""
 "Чтобы произвести действия над объектами, необходимо их выбрать. Объекты не "
 "были изменены."
 
-#: options.py:987
+#: options.py:1000
 msgid "No action selected."
 msgstr "Действие не выбрано."
 
-#: options.py:1067
+#: options.py:1080
 #, python-format
 msgid "Add %s"
 msgstr "Добавить %s"
 
-#: options.py:1091
-#, python-format
-msgid "Sorry, you dont have privilege to update %(name)s."
-msgstr "К сожалению, у вас нет привилегий для обновления %(name)s."
-
-#: options.py:1096 options.py:1362
+#: options.py:1102 options.py:1177 options.py:1443
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
 msgstr "%(name)s с первичным ключом %(key)r не существует."
 
-#: options.py:1177
+#: options.py:1144 options.py:1258
 #, python-format
 msgid "View %s"
 msgstr "Смотреть %s"
 
-#: options.py:1179
+#: options.py:1172
+#, python-format
+msgid "Sorry, you dont have privilege to update %(name)s."
+msgstr "К сожалению, у вас нет привилегий для обновления %(name)s."
+
+#: options.py:1260
 #, python-format
 msgid "Change %s"
 msgstr "Изменить %s"
 
-#: options.py:1233
+#: options.py:1314
 msgid "Database error"
 msgstr "Ошибка базы данных"
 
-#: options.py:1296
+#: options.py:1377
 #, python-format
 msgid "%(count)s %(name)s was changed successfully."
 msgid_plural "%(count)s %(name)s were changed successfully."
@@ -264,7 +264,7 @@ msgstr[0] "%(count)s %(name)s был успешно изменен."
 msgstr[1] "%(count)s %(name)s были успешно изменены."
 msgstr[2] "%(count)s %(name)s были успешно изменены."
 
-#: options.py:1323
+#: options.py:1404
 #, python-format
 msgid "%(total_count)s selected"
 msgid_plural "All %(total_count)s selected"
@@ -272,17 +272,17 @@ msgstr[0] "Выбран %(total_count)s"
 msgstr[1] "Выбраны все %(total_count)s"
 msgstr[2] "Выбраны все %(total_count)s"
 
-#: options.py:1328
+#: options.py:1409
 #, python-format
 msgid "0 of %(cnt)s selected"
 msgstr "Выбрано 0 объектов из %(cnt)s "
 
-#: options.py:1378
+#: options.py:1459
 #, python-format
 msgid "The %(name)s \"%(obj)s\" was deleted successfully."
 msgstr "%(name)s \"%(obj)s\" был успешно удален."
 
-#: options.py:1431
+#: options.py:1512
 #, python-format
 msgid "Change history: %s"
 msgstr "История изменений: %s"
@@ -644,14 +644,18 @@ msgid "%(full_result_count)s total"
 msgstr "%(full_result_count)s всего"
 
 #: templates/admin/submit_line.html:5
+msgid "Edit"
+msgstr ""
+
+#: templates/admin/submit_line.html:6
 msgid "Save as new"
 msgstr "Сохранить как новый объект"
 
-#: templates/admin/submit_line.html:6
+#: templates/admin/submit_line.html:7
 msgid "Save and add another"
 msgstr "Сохранить и добавить другой объект"
 
-#: templates/admin/submit_line.html:7
+#: templates/admin/submit_line.html:8
 msgid "Save and continue editing"
 msgstr "Сохранить и продолжить редактирование"
 
@@ -859,16 +863,21 @@ msgstr "Восстановить мой пароль"
 msgid "All dates"
 msgstr "Все даты"
 
-#: views/main.py:33
+#: views/main.py:34
 msgid "(None)"
 msgstr "(Ничего)"
 
-#: views/main.py:76
+#: views/main.py:77
 #, python-format
 msgid "Select %s"
 msgstr "Выберите %s"
 
-#: views/main.py:78
+#: views/main.py:79
+#, python-format
+msgid "Select %s to view"
+msgstr "Выберите %s для просмотра"
+
+#: views/main.py:81
 #, python-format
 msgid "Select %s to change"
 msgstr "Выберите %s для изменения"

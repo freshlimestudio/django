@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-05 17:00+0300\n"
+"POT-Creation-Date: 2013-07-07 20:47+0300\n"
 "PO-Revision-Date: 2013-01-12 18:22+0000\n"
 "Last-Translator: Sergey Lysach <sergikoff88@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/django/"
@@ -26,12 +26,12 @@ msgstr ""
 msgid "Successfully deleted %(count)d %(items)s."
 msgstr "Успішно видалено %(count)d %(items)s."
 
-#: actions.py:60 options.py:1390
+#: actions.py:60 options.py:1471
 #, python-format
 msgid "Cannot delete %(name)s"
 msgstr "Не можу видалити %(name)s"
 
-#: actions.py:62 options.py:1392
+#: actions.py:62 options.py:1473
 msgid "Are you sure?"
 msgstr "Ви впевнені?"
 
@@ -140,39 +140,39 @@ msgstr "Видалено \"%(object)s.\""
 msgid "LogEntry Object"
 msgstr "Запис у журналі"
 
-#: options.py:156 options.py:172
+#: options.py:158 options.py:174
 msgid "None"
 msgstr "Ніщо"
 
-#: options.py:700
+#: options.py:712
 #, python-format
 msgid "Changed %s."
 msgstr "Змінено %s."
 
-#: options.py:700 options.py:710
+#: options.py:712 options.py:722
 msgid "and"
 msgstr "та"
 
-#: options.py:705
+#: options.py:717
 #, python-format
 msgid "Added %(name)s \"%(object)s\"."
 msgstr "Додано %(name)s \"%(object)s\"."
 
-#: options.py:709
+#: options.py:721
 #, python-format
 msgid "Changed %(list)s for %(name)s \"%(object)s\"."
 msgstr "Змінено %(list)s для %(name)s \"%(object)s\"."
 
-#: options.py:714
+#: options.py:726
 #, python-format
 msgid "Deleted %(name)s \"%(object)s\"."
 msgstr "Видалено %(name)s \"%(object)s\"."
 
-#: options.py:718
+#: options.py:730
 msgid "No fields changed."
 msgstr "Поля не змінені."
 
-#: options.py:824 options.py:877
+#: options.py:837 options.py:890
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was added successfully. You may edit it again below."
@@ -180,7 +180,7 @@ msgstr ""
 "%(name)s \"%(obj)s\"  був успішно доданий. Ви модете редагувати його знову "
 "внизу."
 
-#: options.py:852
+#: options.py:865
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was added successfully. You may add another "
@@ -189,12 +189,12 @@ msgstr ""
 "%(name)s \"%(obj)s\" було успішно додано. Ви можете додати ще одну %(name)s "
 "нижче."
 
-#: options.py:856
+#: options.py:869
 #, python-format
 msgid "The %(name)s \"%(obj)s\" was added successfully."
 msgstr "%(name)s \"%(obj)s\" було додано успішно."
 
-#: options.py:870
+#: options.py:883
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was changed successfully. You may edit it again "
@@ -203,7 +203,7 @@ msgstr ""
 "%(name)s \"%(obj)s\" було успішно змінено. Ви можете знову відредагувати її "
 "нижче."
 
-#: options.py:884
+#: options.py:897
 #, python-format
 msgid ""
 "The %(name)s \"%(obj)s\" was changed successfully. You may add another "
@@ -212,52 +212,52 @@ msgstr ""
 "%(name)s \"%(obj)s\" було успішно змінено. Ви можете додати ще одну %(name)s "
 "нижче."
 
-#: options.py:890
+#: options.py:903
 #, python-format
 msgid "The %(name)s \"%(obj)s\" was changed successfully."
 msgstr "%(name)s \"%(obj)s\" був успішно змінений."
 
-#: options.py:968 options.py:1254
+#: options.py:981 options.py:1335
 msgid ""
 "Items must be selected in order to perform actions on them. No items have "
 "been changed."
 msgstr ""
 "Для виконання дії необхідно обрати елемент. Жодний елемент не був змінений."
 
-#: options.py:987
+#: options.py:1000
 msgid "No action selected."
 msgstr "Жодних дій не обрано."
 
-#: options.py:1067
+#: options.py:1080
 #, python-format
 msgid "Add %s"
 msgstr "Додати %s"
 
-#: options.py:1091
-#, python-format
-msgid "Sorry, you dont have privilege to update %(name)s."
-msgstr "На жаль, у вас немає привілеїв для оновлення %(name)s."
-
-#: options.py:1096 options.py:1362
+#: options.py:1102 options.py:1177 options.py:1443
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
 msgstr "%(name)s об'єкт з первинним ключем %(key)r не існує."
 
-#: options.py:1177
+#: options.py:1144 options.py:1258
 #, python-format
 msgid "View %s"
 msgstr "Дивитися %s"
 
-#: options.py:1179
+#: options.py:1172
+#, python-format
+msgid "Sorry, you dont have privilege to update %(name)s."
+msgstr "На жаль, у вас немає привілеїв для оновлення %(name)s."
+
+#: options.py:1260
 #, python-format
 msgid "Change %s"
 msgstr "Змінити %s"
 
-#: options.py:1233
+#: options.py:1314
 msgid "Database error"
 msgstr "Помилка бази даних"
 
-#: options.py:1296
+#: options.py:1377
 #, python-format
 msgid "%(count)s %(name)s was changed successfully."
 msgid_plural "%(count)s %(name)s were changed successfully."
@@ -265,7 +265,7 @@ msgstr[0] "%(count)s %(name)s був успішно змінений."
 msgstr[1] "%(count)s %(name)s були успішно змінені."
 msgstr[2] "%(count)s %(name)s було успішно змінено."
 
-#: options.py:1323
+#: options.py:1404
 #, python-format
 msgid "%(total_count)s selected"
 msgid_plural "All %(total_count)s selected"
@@ -273,17 +273,17 @@ msgstr[0] "%(total_count)s обраний"
 msgstr[1] "%(total_count)s обрані"
 msgstr[2] "Усі %(total_count)s обрано"
 
-#: options.py:1328
+#: options.py:1409
 #, python-format
 msgid "0 of %(cnt)s selected"
 msgstr "0 з %(cnt)s обрано"
 
-#: options.py:1378
+#: options.py:1459
 #, python-format
 msgid "The %(name)s \"%(obj)s\" was deleted successfully."
 msgstr "%(name)s \"%(obj)s\" був видалений успішно."
 
-#: options.py:1431
+#: options.py:1512
 #, python-format
 msgid "Change history: %s"
 msgstr "Історія змін: %s"
@@ -645,14 +645,18 @@ msgid "%(full_result_count)s total"
 msgstr "%(full_result_count)s всього"
 
 #: templates/admin/submit_line.html:5
+msgid "Edit"
+msgstr ""
+
+#: templates/admin/submit_line.html:6
 msgid "Save as new"
 msgstr "Зберегти як нове"
 
-#: templates/admin/submit_line.html:6
+#: templates/admin/submit_line.html:7
 msgid "Save and add another"
 msgstr "Зберегти і додати інше"
 
-#: templates/admin/submit_line.html:7
+#: templates/admin/submit_line.html:8
 msgid "Save and continue editing"
 msgstr "Зберегти і продовжити редагування"
 
@@ -859,16 +863,21 @@ msgstr "Перевстановіть мій пароль"
 msgid "All dates"
 msgstr "Всі дати"
 
-#: views/main.py:33
+#: views/main.py:34
 msgid "(None)"
 msgstr "(None)"
 
-#: views/main.py:76
+#: views/main.py:77
 #, python-format
 msgid "Select %s"
 msgstr "Вибрати %s"
 
-#: views/main.py:78
+#: views/main.py:79
+#, python-format
+msgid "Select %s to view"
+msgstr "Виберіть %s для перегляду"
+
+#: views/main.py:81
 #, python-format
 msgid "Select %s to change"
 msgstr "Виберіть %s щоб змінити"
