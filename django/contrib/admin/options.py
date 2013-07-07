@@ -402,6 +402,9 @@ class ModelAdmin(BaseModelAdmin):
             url(r'^(.+)/delete/$',
                 wrap(self.delete_view),
                 name='%s_%s_delete' % info),
+            url(r'^(.+)/view/$',
+                wrap(self.view_view),
+                name='%s_%s_view' % info),
             url(r'^(.+)/$',
                 wrap(self.change_view),
                 name='%s_%s_change' % info),
@@ -453,7 +456,7 @@ class ModelAdmin(BaseModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         """
         Returns a Form class for use in the admin add view. This is used by
-        add_view and change_view.
+        add_view, change_view and view_view.
         """
         if self.declared_fieldsets:
             fields = flatten_fieldsets(self.declared_fieldsets)
@@ -786,6 +789,7 @@ class ModelAdmin(BaseModelAdmin):
         context.update({
             'add': add,
             'change': change,
+            'view': not (change or add),
             'has_add_permission': self.has_add_permission(request),
             'has_change_permission': self.has_change_permission(request, obj),
             'has_delete_permission': self.has_delete_permission(request, obj),
@@ -1074,6 +1078,74 @@ class ModelAdmin(BaseModelAdmin):
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
+
+    def view_view(self, request, object_id, form_url='', extra_context=None):
+        "The 'view' admin view for this model."
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_view_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_text(opts.verbose_name), 'key': escape(object_id)})
+
+        ModelForm = self.get_form(request, obj)
+        formsets = []
+        inline_instances = self.get_inline_instances(request, obj)
+
+        form = ModelForm(instance=obj)
+        prefixes = {}
+        for FormSet, inline in zip(self.get_formsets(request, obj), inline_instances):
+            prefix = FormSet.get_default_prefix()
+            prefixes[prefix] = prefixes.get(prefix, 0) + 1
+            if prefixes[prefix] != 1 or not prefix:
+                prefix = "%s-%s" % (prefix, prefixes[prefix])
+            formset = FormSet(instance=obj, prefix=prefix,
+                              queryset=inline.queryset(request))
+            formsets.append(formset)
+
+        adminForm = helpers.AdminForm(form, self.get_fieldsets(request, obj),
+            self.get_prepopulated_fields(request, obj),
+            self.get_form(request, obj)._meta.fields,
+            model_admin=self)
+
+        media = self.media + adminForm.media
+
+        inline_admin_formsets = []
+        for inline, formset in zip(inline_instances, formsets):
+            fieldsets = list(inline.get_fieldsets(request, obj))
+            if inline.fieldsets:
+                readonly = []
+                for fs in inline.fieldsets:
+                    fields = fs[1].get('fields', [])
+                    for ff in fields:
+                        readonly.append(ff)
+            else:
+                readonly = [o_field.attname for o_field in inline.model._meta.fields]
+
+            prepopulated = dict(inline.get_prepopulated_fields(request, obj))
+            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
+                fieldsets, prepopulated, readonly, model_admin=self)
+            inline_admin_formsets.append(inline_admin_formset)
+            media = media + inline_admin_formset.media
+
+        title = _('View %s') % force_text(opts.verbose_name)
+        context = {
+            'title': title,
+            'adminform': adminForm,
+            'object_id': object_id,
+            'original': obj,
+            'is_popup': "_popup" in request.REQUEST,
+            'media': media,
+            'inline_admin_formsets': inline_admin_formsets,
+            'errors': helpers.AdminErrorList(form, formsets),
+            'app_label': opts.app_label,
+        }
+        context.update(extra_context or {})
+        return self.render_change_form(request, context, obj=obj, form_url=form_url)
 
     @csrf_protect_m
     @transaction.commit_on_success

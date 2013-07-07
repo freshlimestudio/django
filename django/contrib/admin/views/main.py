@@ -1,5 +1,6 @@
 import operator
 from functools import reduce
+from django.conf import settings
 
 from django.core.exceptions import SuspiciousOperation, ImproperlyConfigured
 from django.core.paginator import InvalidPage
@@ -75,7 +76,9 @@ class ChangeList(object):
         if self.is_popup:
             title = ugettext('Select %s')
         else:
-            title = ugettext('Select %s to change')
+            title = ugettext('Select %s to view')
+            if model_admin.has_change_permission(request, None):
+                title = ugettext('Select %s to change')
         self.title = title % force_text(self.opts.verbose_name)
         self.pk_attname = self.lookup_opts.pk.attname
 
@@ -378,7 +381,9 @@ class ChangeList(object):
 
     def url_for_result(self, result):
         pk = getattr(result, self.pk_attname)
-        return reverse('admin:%s_%s_change' % (self.opts.app_label,
-                                               self.opts.module_name),
-                       args=(quote(pk),),
+        show_view_urls = settings.SHOW_VIEW_URLS_IN_CHANGELIST
+        url_template = 'admin:%s_%s_change' % (self.opts.app_label, self.opts.module_name)
+        if show_view_urls:
+            url_template = 'admin:%s_%s_view' % (self.opts.app_label, self.opts.module_name)
+        return reverse(url_template, args=(quote(pk),),
                        current_app=self.model_admin.admin_site.name)

@@ -598,3 +598,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+SHOW_VIEW_URLS_IN_CHANGELIST = True

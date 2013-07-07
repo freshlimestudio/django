@@ -179,12 +179,17 @@ body.popup .submit-row {
     margin: 0.3em;
 }
 
-.submit-row p.deletelink-box {
+.submit-row p.deletelink-box, .submit-row p.changelink-box {
     float: left;
 }
 
-.submit-row .deletelink {
+.submit-row .deletelink, {
     background: url(../img/icon_deletelink.gif) 0 50% no-repeat;
+    padding-left: 14px;
+}
+
+.submit-row .changelink {
+    background: url(../img/icon_changelink.gif) 0 50% no-repeat;
     padding-left: 14px;
 }
 
